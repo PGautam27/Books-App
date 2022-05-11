@@ -1,6 +1,9 @@
 package com.example.booksapplication.feature.di
 
 import com.example.booksapplication.core.Constants
+import com.example.booksapplication.feature.data.remote.BooksApi
+import com.example.booksapplication.feature.data.repository.BooksRepositoryImpl
+import com.example.booksapplication.feature.domain.repository.BooksRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -26,6 +29,13 @@ object AppModule {
     @Provides
     fun provideGson(): Gson = GsonBuilder().create()
 
+    @Provides
+    fun provideBooksService(retrofit: Retrofit): BooksApi = retrofit.create(BooksApi::class.java)
 
+    @Provides
+    @Singleton
+    fun providesBooksRepository(api: BooksApi): BooksRepository{
+        return BooksRepositoryImpl(api = api)
+    }
 
 }
