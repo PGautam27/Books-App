@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 interface BooksApi {
 
-    @GET("list")
+    @GET("list/")
     suspend fun getAllBooks() : BooksDto
 
 }

@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.booksapplication.feature.presentation.Books.Books
 import com.example.booksapplication.ui.theme.BooksApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,12 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BooksApplicationTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
+                Books()
             }
         }
     }
