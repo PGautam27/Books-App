@@ -3,8 +3,12 @@ package com.example.booksapplication.feature.presentation.Books
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.booksapplication.core.Resources
+import com.example.booksapplication.feature.data.remote.dto.BooksDtoItem
 import com.example.booksapplication.feature.domain.useCases.GetBooksUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
@@ -16,10 +20,24 @@ class BooksViewModel @Inject constructor(
     private val _state = mutableStateOf(BooksState())
     val state: State<BooksState> = _state
 
+    init {
+        getBooks()
+    }
+
     private fun getBooks(){
         getBooksUseCases().onEach { result->
-
-        }
+            when(result){
+                is Resources.Success ->{
+                    _state.value = BooksState(books = result.data as List<BooksDtoItem>? ?: emptyList())
+                }
+                is Resources.Error -> {
+                    _state.value = BooksState(error = result.message?: "An unexpected error occurred")
+                }
+                is Resources.Loading -> {
+                    _state.value = BooksState(isLoading = true)
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
 }
