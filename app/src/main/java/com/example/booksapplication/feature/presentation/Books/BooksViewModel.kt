@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.booksapplication.feature.domain.useCases.GetBooksUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,7 +17,9 @@ class BooksViewModel @Inject constructor(
     val state: State<BooksState> = _state
 
     private fun getBooks(){
+        getBooksUseCases().onEach { result->
 
+        }
     }
 
 }
