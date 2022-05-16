@@ -22,7 +22,7 @@ object AppModule {
     @Provides
     @Singleton
     fun bookApi(gson: Gson): Retrofit = Retrofit.Builder()
-        .baseUrl(Constants.BASE_URL)
+        .baseUrl("http://127.0.0.1:8000/books/list/")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
