@@ -26,6 +26,7 @@ object AppModule {
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
+
     @Provides
     fun provideGson(): Gson = GsonBuilder().create()
 
