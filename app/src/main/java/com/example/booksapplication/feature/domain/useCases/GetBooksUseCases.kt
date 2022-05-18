@@ -13,15 +13,15 @@ import javax.inject.Inject
 class GetBooksUseCases @Inject constructor(
     private val repository: BooksRepository
 ) {
-    operator fun invoke(): Flow<Resources<List<BooksDtoItem>>> = flow {
+    operator fun invoke(): Flow<Resources<BooksDto>> = flow {
         try {
-            emit(Resources.Loading<List<BooksDtoItem>>())
+            emit(Resources.Loading<BooksDto>())
             val books = repository.getBooks()
-            emit(Resources.Success<List<BooksDtoItem>>(books))
+            emit(Resources.Success<BooksDto>(books))
         }catch (e: HttpException){
-            emit(Resources.Error<List<BooksDtoItem>>(e.localizedMessage?: "An unexpected error occurred"))
+            emit(Resources.Error<BooksDto>(e.localizedMessage?: "An unexpected error occurred"))
         }catch (e: IOException){
-            emit(Resources.Error<List<BooksDtoItem>>("Couldn't reach the server."))
+            emit(Resources.Error<BooksDto>("Couldn't reach the server."))
         }
     }
 }
