@@ -10,8 +10,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 import javax.inject.Singleton
 
 
@@ -22,8 +25,9 @@ object AppModule {
     @Provides
     @Singleton
     fun bookApi(gson: Gson): Retrofit = Retrofit.Builder()
-        .baseUrl("http://127.0.0.1:8000/books/list/")
+        .baseUrl("http://10.0.2.2:8000/books/")
         .addConverterFactory(GsonConverterFactory.create(gson))
+        .client(OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor()).build())
         .build()
 
 

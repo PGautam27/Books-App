@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.booksapplication.core.Resources
+import com.example.booksapplication.core.*
 import com.example.booksapplication.feature.data.remote.dto.BooksDto
 import com.example.booksapplication.feature.domain.useCases.GetBooksUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,16 +26,12 @@ class BooksViewModel @Inject constructor(
 
     private fun getBooks(){
         getBooksUseCases().onEach { result->
-            when(result){
-                is Resources.Success ->{
-                    _state.value = BooksState(books = result.data as BooksDto)
-                }
-                is Resources.Error -> {
-                    _state.value = BooksState(error = result.message?: "An unexpected error occurred")
-                }
-                is Resources.Loading -> {
-                    _state.value = BooksState(isLoading = true)
-                }
+            result.onSuccess {
+                _state.value = BooksState(books = it)
+            }.onLoading {
+                _state.value = BooksState(isLoading = true)
+            }.onError { message, _ ->
+                _state.value = BooksState(error = message)
             }
         }.launchIn(viewModelScope)
     }

@@ -1,6 +1,9 @@
 package com.example.booksapplication.feature.domain.useCases
 
+import com.example.booksapplication.core.Error
+import com.example.booksapplication.core.Loading
 import com.example.booksapplication.core.Resources
+import com.example.booksapplication.core.Success
 import com.example.booksapplication.feature.data.remote.dto.BooksDto
 import com.example.booksapplication.feature.data.remote.dto.BooksDtoItem
 import com.example.booksapplication.feature.domain.repository.BooksRepository
@@ -15,13 +18,13 @@ class GetBooksUseCases @Inject constructor(
 ) {
     operator fun invoke(): Flow<Resources<BooksDto>> = flow {
         try {
-            emit(Resources.Loading<BooksDto>())
+            emit(Loading<BooksDto>())
             val books = repository.getBooks()
-            emit(Resources.Success<BooksDto>(books))
+            emit(Success<BooksDto>(books))
         }catch (e: HttpException){
-            emit(Resources.Error<BooksDto>(e.localizedMessage?: "An unexpected error occurred"))
+            emit(Error<BooksDto>(e.localizedMessage?: "An unexpected error occurred"))
         }catch (e: IOException){
-            emit(Resources.Error<BooksDto>("Couldn't reach the server."))
+            emit(Error<BooksDto>("Couldn't reach the server."))
         }
     }
 }
