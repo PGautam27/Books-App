@@ -1,5 +1,5 @@
 package com.example.booksapplication.core
 
 object Constants {
-    const val BASE_URL = "http://127.0.0.1:8000/books/"
+    const val BASE_URL = "https://booksapi1.herokuapp.com/books/"
 }

@@ -25,7 +25,7 @@ object AppModule {
     @Provides
     @Singleton
     fun bookApi(gson: Gson): Retrofit = Retrofit.Builder()
-        .baseUrl("http://10.0.2.2:8000/books/")
+        .baseUrl(Constants.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor()).build())
         .build()
