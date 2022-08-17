@@ -46,7 +46,7 @@ fun BookListScreen(viewModel: BooksViewModel = hiltViewModel()) {
                         Text(text = book.publish_date)
                     }
                 }
-                Spacer(modifier = Modifier.padding(25.dp))
+                Spacer(modifier = Modifier.padding(20.dp))
             }
         }
         if (state.error.isNotBlank()){
