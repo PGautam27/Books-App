@@ -15,23 +15,35 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun Books(viewModel: BooksViewModel = hiltViewModel()) {
+fun BookListScreen(viewModel: BooksViewModel = hiltViewModel()) {
     val state = viewModel.state.value
     Box(modifier = Modifier.fillMaxSize()){
-        LazyColumn(modifier = Modifier.fillMaxSize()){
-            items(state.books){ book->
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            items(state.books) { book ->
                 Card(
                     modifier = Modifier
                         .width(LocalConfiguration.current.screenWidthDp.dp - 50.dp)
                         .height(
                             LocalConfiguration.current.screenHeightDp.dp / 8
                         )
-                        .clip(RoundedCornerShape(20.dp)).align(Alignment.Center)
+                        .clip(RoundedCornerShape(20.dp))
+                        .align(Alignment.Center)
                 ) {
-                    Text(text = book.title)
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Text(text = book.publish_date)
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(text = book.title)
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Text(text = book.publish_date)
+                    }
                 }
+                Spacer(modifier = Modifier.padding(25.dp))
             }
         }
     }
