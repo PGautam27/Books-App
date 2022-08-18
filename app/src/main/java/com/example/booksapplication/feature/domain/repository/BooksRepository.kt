@@ -7,4 +7,6 @@ interface BooksRepository {
 
     suspend fun getBooks() : BooksDto
 
+    suspend fun createBooks(booksDto: BooksDto) : BooksDto
+
 }

@@ -12,4 +12,8 @@ class BooksRepositoryImpl @Inject constructor(
     override suspend fun getBooks(): BooksDto{
         return api.getAllBooks()
     }
+
+    override suspend fun createBooks(booksDto:BooksDto): BooksDto {
+        TODO("Not yet implemented")
+    }
 }
