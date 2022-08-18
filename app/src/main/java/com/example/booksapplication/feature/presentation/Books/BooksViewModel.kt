@@ -21,7 +21,7 @@ class BooksViewModel @Inject constructor(
 
     private val _state = mutableStateOf(BooksState())
     val state: State<BooksState> = _state
-    private val _title =
+    private val _title = mutableStateOf(String())
 
     init {
         getBooks()
