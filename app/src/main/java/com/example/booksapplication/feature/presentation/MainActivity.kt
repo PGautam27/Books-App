@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.booksapplication.feature.presentation.Books.BookListScreen
+import com.example.booksapplication.feature.presentation.CreateBooks.CreateBooks
 import com.example.booksapplication.feature.presentation.screens.Screens
 import com.example.booksapplication.ui.theme.BooksApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +25,9 @@ class MainActivity : ComponentActivity() {
                 NavHost(navController = navController, startDestination = Screens.BookListScreen.route){
                     composable(Screens.BookListScreen.route){
                         BookListScreen()
+                    }
+                    composable(Screens.CreateBooksScreen.route){
+                        CreateBooks()
                     }
                 }
             }
