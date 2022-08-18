@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.booksapplication.core.*
 import com.example.booksapplication.feature.data.remote.dto.BooksDto
+import com.example.booksapplication.feature.domain.useCases.CreateBooksUseCases
 import com.example.booksapplication.feature.domain.useCases.GetBooksUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -14,11 +15,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BooksViewModel @Inject constructor(
-    private val getBooksUseCases: GetBooksUseCases
+    private val getBooksUseCases: GetBooksUseCases,
+    private val createBooksUseCases: CreateBooksUseCases
 ) : ViewModel(){
 
     private val _state = mutableStateOf(BooksState())
     val state: State<BooksState> = _state
+    private val _title =
 
     init {
         getBooks()
@@ -34,6 +37,10 @@ class BooksViewModel @Inject constructor(
                 _state.value = BooksState(error = message)
             }
         }.launchIn(viewModelScope)
+    }
+
+    suspend fun createBooks(booksDto: BooksDto){
+        createBooksUseCases.createBooks(booksDto)
     }
 
 }
