@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.booksapplication.core.*
 import com.example.booksapplication.feature.data.remote.dto.BooksDto
+import com.example.booksapplication.feature.data.remote.dto.BooksSendingItem
 import com.example.booksapplication.feature.domain.useCases.CreateBooksUseCases
 import com.example.booksapplication.feature.domain.useCases.GetBooksUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,8 +40,8 @@ class BooksViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    suspend fun createBooks(booksDto: BooksDto){
-        createBooksUseCases.createBooks(booksDto)
+    suspend fun createBooks(booksSendingItem: BooksSendingItem){
+        createBooksUseCases.createBooks(booksSendingItem)
     }
 
 }

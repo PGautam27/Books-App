@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                         BookListScreen()
                     }
                     composable(Screens.CreateBooksScreen.route){
-                        CreateBooks()
+                        CreateBooks(context = this@MainActivity)
                     }
                 }
             }
