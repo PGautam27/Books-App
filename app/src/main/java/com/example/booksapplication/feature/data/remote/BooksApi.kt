@@ -7,9 +7,9 @@ import retrofit2.http.POST
 
 interface BooksApi {
 
-    @GET("list/")
+    @GET("books/list/")
     suspend fun getAllBooks() : BooksDto
 
-    @POST("")
+    @POST("books/")
     suspend fun createBooks(booksSendingItem: BooksSendingItem) : BooksSendingItem
 }

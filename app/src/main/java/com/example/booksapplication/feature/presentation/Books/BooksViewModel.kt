@@ -46,7 +46,7 @@ class BooksViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    suspend fun createBooks(){
+    private suspend fun createBooks(){
         createBooksUseCases.createBooks(convertBooks())
     }
 
