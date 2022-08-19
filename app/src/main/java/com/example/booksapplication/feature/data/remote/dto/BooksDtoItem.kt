@@ -14,3 +14,14 @@ data class BooksDtoItem(
     @SerializedName("title")
     val title: String
 )
+
+data class BooksSendingItem(
+    @SerializedName("number_of_pages")
+    val number_of_pages: Int,
+    @SerializedName("publish_date")
+    val publish_date: String,
+    @SerializedName("quantity")
+    val quantity: Int,
+    @SerializedName("title")
+    val title: String
+)

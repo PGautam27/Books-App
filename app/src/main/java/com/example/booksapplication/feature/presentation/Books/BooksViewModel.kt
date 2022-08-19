@@ -2,6 +2,7 @@ package com.example.booksapplication.feature.presentation.Books
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.booksapplication.core.*
@@ -21,7 +22,6 @@ class BooksViewModel @Inject constructor(
 
     private val _state = mutableStateOf(BooksState())
     val state: State<BooksState> = _state
-    private val _title = mutableStateOf(String())
 
     init {
         getBooks()
