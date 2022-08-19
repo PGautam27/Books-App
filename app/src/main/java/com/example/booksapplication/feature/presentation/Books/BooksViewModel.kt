@@ -13,6 +13,7 @@ import com.example.booksapplication.feature.domain.useCases.GetBooksUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,6 +24,11 @@ class BooksViewModel @Inject constructor(
 
     private val _state = mutableStateOf(BooksState())
     val state: State<BooksState> = _state
+
+    private val _title = MutableLiveData<String>()
+    private val _publish_date = MutableLiveData<String>()
+    private val number_of_Pages = MutableLiveData<Int>()
+    private val _quantity = MutableLiveData<Int>()
 
     init {
         getBooks()
@@ -40,8 +46,37 @@ class BooksViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    suspend fun createBooks(booksSendingItem: BooksSendingItem){
-        createBooksUseCases.createBooks(booksSendingItem)
+    suspend fun createBooks(){
+        createBooksUseCases.createBooks(convertBooks())
+    }
+
+     fun updateBooks(
+        title: String,
+        numberOfPages: String,
+        publishDate: String,
+        quantity: String
+    ){
+
+        val numberOfPages1 = numberOfPages.toInt()
+        val quantity1 = quantity.toInt()
+
+        _title.value = title
+        number_of_Pages.value = numberOfPages1
+        _publish_date.value = publishDate
+        _quantity.value = quantity1
+
+         viewModelScope.launch {
+             createBooks()
+         }
+    }
+
+    private fun convertBooks():BooksSendingItem{
+        return BooksSendingItem(
+            title = _title.value.toString(),
+            number_of_pages = number_of_Pages.value!!.toInt(),
+            publish_date = _publish_date.value.toString(),
+            quantity = _quantity.value!!.toInt()
+        )
     }
 
 }

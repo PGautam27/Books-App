@@ -52,30 +52,11 @@ fun CreateBooks(viewModel: BooksViewModel = hiltViewModel(),context : ComponentA
 
         Button(onClick = {
             if (titleValue.value.isNotEmpty() && numberOfPages.value.isNotEmpty() && publishDate.value.isNotEmpty() && quantity.value.isNotEmpty()){
-                val books = convertBooksDto(title = titleValue.value, numberOfPages = numberOfPages.value, publishDate = publishDate.value, quantity = quantity.value)
-                Toast.makeText(context, "It worked go check the backend", Toast.LENGTH_SHORT).show()
+                viewModel.updateBooks(title = titleValue.value, numberOfPages = numberOfPages.value, publishDate = publishDate.value, quantity = quantity.value)
             }
             else Toast.makeText(context, "Boy some problem occurred", Toast.LENGTH_SHORT).show()
         }) {
             Text(text = "Create book")
         }
     }
-}
-
-private fun convertBooksDto(
-    title: String,
-    numberOfPages: String,
-    publishDate: String,
-    quantity: String
-): BooksSendingItem {
-
-    val numberOfPages1 = numberOfPages.toInt()
-    val quantity1 = quantity.toInt()
-
-    return BooksSendingItem(
-        title = title,
-        number_of_pages = numberOfPages1,
-        publish_date = publishDate,
-        quantity = quantity1
-    )
 }
