@@ -8,6 +8,6 @@ interface BooksRepository {
 
     suspend fun getBooks() : BooksDto
 
-    suspend fun createBooks(booksSendingItem: BooksSendingItem) : BooksSendingItem
+    suspend fun createBooks(booksSendingItem: BooksSendingItem)
 
 }

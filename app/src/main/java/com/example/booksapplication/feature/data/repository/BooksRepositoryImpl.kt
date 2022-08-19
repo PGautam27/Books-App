@@ -3,6 +3,7 @@ package com.example.booksapplication.feature.data.repository
 import com.example.booksapplication.feature.data.remote.BooksApi
 import com.example.booksapplication.feature.data.remote.dto.BooksDto
 import com.example.booksapplication.feature.data.remote.dto.BooksDtoItem
+import com.example.booksapplication.feature.data.remote.dto.BooksSendingItem
 import com.example.booksapplication.feature.domain.repository.BooksRepository
 import javax.inject.Inject
 
@@ -13,7 +14,7 @@ class BooksRepositoryImpl @Inject constructor(
         return api.getAllBooks()
     }
 
-    override suspend fun createBooks(booksDto:BooksDto): BooksDto {
-        TODO("Not yet implemented")
+    override suspend fun createBooks(booksSendingItem: BooksSendingItem)  {
+        api.createBooks(booksSendingItem)
     }
 }
