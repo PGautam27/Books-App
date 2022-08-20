@@ -13,7 +13,7 @@ class BooksRepositoryImpl @Inject constructor(
         return api.getAllBooks()
     }
 
-    override suspend fun createBooks(booksDtoItem: BooksDtoItem)  {
-        api.createBooks(booksDtoItem)
+    override suspend fun createBooks(booksSendingItem: BooksDtoItem)  {
+        api.createBooks(booksSendingItem)
     }
 }
