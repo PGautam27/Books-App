@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.booksapplication.feature.data.remote.dto.BooksSendingItem
 import com.example.booksapplication.feature.presentation.Books.BooksViewModel
 
 @Composable
@@ -22,13 +21,13 @@ fun CreateBooks(viewModel: BooksViewModel = hiltViewModel(),context : ComponentA
     val titleValue = remember {
         mutableStateOf(String())
     }
-    val publishDate = remember {
+    val authorName = remember {
         mutableStateOf(String())
     }
-    val numberOfPages = remember {
-        mutableStateOf(String())
+    val completedReading = remember {
+        mutableStateOf(Boolean)
     }
-    val quantity = remember {
+    val readingPlatform = remember {
         mutableStateOf(String())
     }
 
@@ -41,18 +40,16 @@ fun CreateBooks(viewModel: BooksViewModel = hiltViewModel(),context : ComponentA
         OutlinedTextField(value = titleValue.value, onValueChange = {titleValue.value = it})
         Spacer(modifier = Modifier.padding(20.dp))
 
-        OutlinedTextField(value = numberOfPages.value, onValueChange = {numberOfPages.value = it})
+
+        OutlinedTextField(value = authorName.value, onValueChange = {authorName.value = it})
         Spacer(modifier = Modifier.padding(20.dp))
 
-        OutlinedTextField(value = publishDate.value, onValueChange = {publishDate.value = it})
-        Spacer(modifier = Modifier.padding(20.dp))
-
-        OutlinedTextField(value = quantity.value, onValueChange = {quantity.value = it})
+        OutlinedTextField(value = readingPlatform.value, onValueChange = {readingPlatform.value = it})
         Spacer(modifier = Modifier.padding(20.dp))
 
         Button(onClick = {
-            if (titleValue.value.isNotEmpty() && numberOfPages.value.isNotEmpty() && publishDate.value.isNotEmpty() && quantity.value.isNotEmpty()){
-                viewModel.updateBooks(title = titleValue.value, numberOfPages = numberOfPages.value, publishDate = publishDate.value, quantity = quantity.value)
+            if (titleValue.value.isNotEmpty() && authorName.value.isNotEmpty() && readingPlatform.value.isNotEmpty()){
+                viewModel.updateBooks(title = titleValue.value, author_name = authorName.value, completed_reading = true, reading_platform = readingPlatform.value)
             }
             else Toast.makeText(context, "Boy some problem occurred", Toast.LENGTH_SHORT).show()
         }) {
