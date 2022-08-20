@@ -2,12 +2,11 @@ package com.example.booksapplication.feature.domain.repository
 
 import com.example.booksapplication.feature.data.remote.dto.BooksDto
 import com.example.booksapplication.feature.data.remote.dto.BooksDtoItem
-import com.example.booksapplication.feature.data.remote.dto.BooksSendingItem
 
 interface BooksRepository {
 
     suspend fun getBooks() : BooksDto
 
-    suspend fun createBooks(booksSendingItem: BooksSendingItem)
+    suspend fun createBooks(booksSendingItem: BooksDtoItem)
 
 }
