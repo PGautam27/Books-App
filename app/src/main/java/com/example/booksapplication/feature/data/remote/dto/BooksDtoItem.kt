@@ -3,25 +3,23 @@ package com.example.booksapplication.feature.data.remote.dto
 import com.google.gson.annotations.SerializedName
 
 data class BooksDtoItem(
-    @SerializedName("id")
-    val id: Int,
-    @SerializedName("number_of_pages")
-    val number_of_pages: Int,
-    @SerializedName("publish_date")
-    val publish_date: String,
-    @SerializedName("quantity")
-    val quantity: Int,
     @SerializedName("title")
-    val title: String
+    val title: String,
+    @SerializedName("author_name")
+    val author_name: String,
+    @SerializedName("completed_reading")
+    val completed_reading: Boolean,
+    @SerializedName("reading_platform")
+    val reading_platform: String
 )
 
 data class BooksSendingItem(
-    @SerializedName("number_of_pages")
-    val number_of_pages: Int,
-    @SerializedName("publish_date")
-    val publish_date: String,
-    @SerializedName("quantity")
-    val quantity: Int,
     @SerializedName("title")
-    val title: String
+    val title: String,
+    @SerializedName("author_name")
+    val author_name: String,
+    @SerializedName("completed_reading")
+    val completed_reading: Boolean,
+    @SerializedName("reading_platform")
+    val reading_platform: String
 )
