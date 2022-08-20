@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.booksapplication.core.*
-import com.example.booksapplication.feature.data.remote.dto.BooksDto
 import com.example.booksapplication.feature.data.remote.dto.BooksSendingItem
 import com.example.booksapplication.feature.domain.useCases.CreateBooksUseCases
 import com.example.booksapplication.feature.domain.useCases.GetBooksUseCases
@@ -26,9 +25,9 @@ class BooksViewModel @Inject constructor(
     val state: State<BooksState> = _state
 
     private val _title = MutableLiveData<String>()
-    private val _publish_date = MutableLiveData<String>()
-    private val number_of_Pages = MutableLiveData<Int>()
-    private val _quantity = MutableLiveData<Int>()
+    private val _author_name = MutableLiveData<String>()
+    private val _completed_reading = MutableLiveData<Boolean>()
+    private val _reading_platform = MutableLiveData<String>()
 
     init {
         getBooks()
@@ -52,18 +51,15 @@ class BooksViewModel @Inject constructor(
 
      fun updateBooks(
         title: String,
-        numberOfPages: String,
-        publishDate: String,
-        quantity: String
+        author_name : String,
+        completed_reading : Boolean,
+        reading_platform : String
     ){
 
-        val numberOfPages1 = numberOfPages.toInt()
-        val quantity1 = quantity.toInt()
-
         _title.value = title
-        number_of_Pages.value = numberOfPages1
-        _publish_date.value = publishDate
-        _quantity.value = quantity1
+         _author_name.value= author_name
+        _reading_platform.value = reading_platform
+        _completed_reading.value = completed_reading
 
          viewModelScope.launch {
              createBooks()
@@ -73,9 +69,9 @@ class BooksViewModel @Inject constructor(
     private fun convertBooks():BooksSendingItem{
         return BooksSendingItem(
             title = _title.value.toString(),
-            number_of_pages = number_of_Pages.value!!.toInt(),
-            publish_date = _publish_date.value.toString(),
-            quantity = _quantity.value!!.toInt()
+            completed_reading = _completed_reading.value!!,
+            author_name = _author_name.value.toString(),
+            reading_platform = _reading_platform.value.toString()
         )
     }
 
