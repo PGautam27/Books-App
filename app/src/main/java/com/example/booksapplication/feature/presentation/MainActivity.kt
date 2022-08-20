@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BooksApplicationTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = Screens.BookListScreen.route){
+                NavHost(navController = navController, startDestination = Screens.CreateBooksScreen.route){
                     composable(Screens.BookListScreen.route){
                         BookListScreen()
                     }

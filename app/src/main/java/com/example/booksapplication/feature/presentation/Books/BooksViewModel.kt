@@ -5,8 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.booksapplication.core.*
-import com.example.booksapplication.feature.data.remote.dto.BooksSendingItem
+import com.example.booksapplication.core.onError
+import com.example.booksapplication.core.onLoading
+import com.example.booksapplication.core.onSuccess
+import com.example.booksapplication.feature.data.remote.dto.BooksDtoItem
 import com.example.booksapplication.feature.domain.useCases.CreateBooksUseCases
 import com.example.booksapplication.feature.domain.useCases.GetBooksUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -66,8 +68,8 @@ class BooksViewModel @Inject constructor(
          }
     }
 
-    private fun convertBooks():BooksSendingItem{
-        return BooksSendingItem(
+    private fun convertBooks():BooksDtoItem{
+        return BooksDtoItem(
             title = _title.value.toString(),
             completed_reading = _completed_reading.value!!,
             author_name = _author_name.value.toString(),
