@@ -45,7 +45,7 @@ fun BookListScreen(viewModel: BooksViewModel = hiltViewModel()) {
                     ) {
                         Text(text = book.title)
                         Spacer(modifier = Modifier.height(20.dp))
-                        Text(text = book.publish_date)
+                        Text(text = book.author_name)
                     }
                 }
                 Spacer(modifier = Modifier.padding(20.dp))
